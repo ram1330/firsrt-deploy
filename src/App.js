@@ -1,23 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addTodo, getAllTodos } from "./redux/todosSlice";
+import TodoItem from "./components/TodoItem.jsx";
 
 function App() {
+  const dispatch = useDispatch();
+  const todos = useSelector((state) => state.todos.todos);
+  const [value, setValue] = useState("");
+
+  useEffect(() => {
+    dispatch(getAllTodos());
+  }, []);
+
+  const handleAdd = () => {
+    const newTodo = {
+      id: Date.now(),
+      task: value,
+      completed: false,
+    };
+    dispatch(addTodo(newTodo));
+    setValue("");
+  };
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Add todo</h1>
+      <input
+        type="text"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+      />
+      <button onClick={handleAdd}>Add</button>
+
+      <br />
+      <br />
+
+      <h2>Todos</h2>
+      <ul>
+        {todos.map((el) => {
+          return (
+            <TodoItem todo={el} key={el.id}/>
+          );
+        })}
+      </ul>
     </div>
   );
 }
