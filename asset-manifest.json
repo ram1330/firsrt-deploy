@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/firsrt-deploy/static/js/main.f23d7593.js",
+    "index.html": "/firsrt-deploy/index.html",
+    "main.f23d7593.js.map": "/firsrt-deploy/static/js/main.f23d7593.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.f23d7593.js"
+  ]
+}
